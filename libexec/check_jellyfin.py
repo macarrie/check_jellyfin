@@ -6,6 +6,7 @@ import os
 import sys
 import time
 import urllib2
+import ssl
 from datetime import date
 import datetime
 
@@ -79,7 +80,7 @@ def api_call(hostname, port, https, token, path):
         req = urllib2.urlopen(urllib2.Request(url=url, headers = {
             'Accept': 'application/json',
             'X-Emby-Token': token,
-            }))
+            }), context=ssl._create_unverified_context())
         end = time.time()
 
         data = req.read()
